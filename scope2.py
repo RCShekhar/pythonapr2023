@@ -1,12 +1,12 @@
 # print abs number
 
-number = -100
+number = -10
 
-def abs(num):
-    if num < 0:
-        num = num * -1
-    return num
+def abs():
+    global number
+    if number < 0:
+        number = number * -1
         
-number = abs(num=number)
+abs()
 
 print(number)
