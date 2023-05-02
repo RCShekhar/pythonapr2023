@@ -36,8 +36,6 @@ for student in result:
     if i<=17:
         disc_data.append(f"{i}|{i+80.0}")
         i+=1
-    
-
 
 
 print(students)
