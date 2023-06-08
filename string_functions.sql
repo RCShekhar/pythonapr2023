@@ -22,3 +22,4 @@ select rtrim(ltrim('*****####hello*****####', '*#'), '*#') from dual;
 
 
 
+
