@@ -72,11 +72,10 @@ def update_student(std_id):
         if key == 'std_id':
             new_key = "id="
         elif key == 'std_name':
-            new_key ="name ="
+            new_key ="name="
         else:
             new_key =key+'='
-
-        updates.append(new_key + str(value) if str(value).isnumeric() else "'"+str(value)+"'")
+        updates.append(new_key + (str(value) if str(value).isnumeric() else "'"+str(value)+"'"))
 
     query = f"update student set {','.join(updates)} where id={std_id}"
     print(query)
