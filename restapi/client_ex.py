@@ -1,5 +1,8 @@
 import boto3
 from botocore.exceptions import ClientError
+from flask import Flask
+
+app = Flask('RESTful')
 
 
 client = boto3.client('dynamodb')
@@ -86,7 +89,7 @@ def update_movie(title, year, rating, director):
 
     return response
 
-
+@app.get('/movies/<int:year>/<string:title>')
 def get_movie(year, title):
 
     response = client.get_item(
@@ -101,6 +104,7 @@ def get_movie(year, title):
         }
     )
     return response
+
 
 def delete_item(year, title, rating):
     resp = client.delete_item(
@@ -124,6 +128,8 @@ def delete_item(year, title, rating):
     return resp
 
 
+
+
 # movie_table = create_table() 
 # print(movie_table)
 
@@ -137,5 +143,7 @@ def delete_item(year, title, rating):
 # print(resp['Item'])
 
 
-resp = delete_item(2021, 'New Movie', 3)
-print(resp)
+# resp = delete_item(2021, 'New Movie', 3)
+# print(resp)
+
+app.run()
