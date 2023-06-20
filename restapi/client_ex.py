@@ -87,6 +87,41 @@ def update_movie(title, year, rating, director):
     return response
 
 
+def get_movie(year, title):
+
+    response = client.get_item(
+        TableName='Movies',
+        Key={
+            'year': {
+                'N':'{}'.format(year)
+            },
+            'title': {
+                'S':'{}'.format(title)
+            }
+        }
+    )
+    return response
+
+def delete_item(year, title, rating):
+    resp = client.delete_item(
+        TableName='Movies',
+        Key={
+            'year':{
+                'N':'{}'.format(year)
+            },
+            'title':{
+                'S':'{}'.format(title)
+            }
+        },
+        ConditionExpression="rating <= :r",
+        ExpressionAttributeValues={
+            ':r': {
+                'N':'{}'.format(rating)
+            }
+        }
+    )
+
+    return resp
 
 
 # movie_table = create_table() 
@@ -95,5 +130,12 @@ def update_movie(title, year, rating, director):
 # put_res = put_movie_item('RRR', 2022, rating=4.5)
 # print(put_res)
 
-resp = update_movie('RRR', 2022, 5, 'SSR')
+# resp = update_movie('RRR', 2022, 5, 'SSR')
+# print(resp)
+
+# resp = get_movie(2022, 'RRR')
+# print(resp['Item'])
+
+
+resp = delete_item(2021, 'New Movie', 3)
 print(resp)
